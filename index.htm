@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Facebook API :: Picture Upload</title>
+<!-- Include the Facebook Javascript API -->
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<!-- Include the normal stylesheet-->
+<link href="style.css" rel="stylesheet" />
+
+<!-- This is the main script file, which holds all the login-->
+<script src="script.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	function initialize() {
+		//here we pass the Facebook "AppId"
+		var fb = new facebookAPI("175679282469826");
+		fb.init();
+		document.getElementById("loginBtn").onclick = fb.login;
+		document.getElementById("uploadBtn").onclick = fb.upload;
+	}
+</script>
+</head>
+<body onload="initialize()">
+<div id="fb-root"></div>
+      <div id="wrapper">
+		<h1>Upload Picture to Facebook</h1>
+		<h2>using Facebook Javascript SDK</h2>
+		<input class="btn" type="button" id="loginBtn" value="Get Permissions from Facebook"/>
+
+		<!-- This is the form which will basically upload the picture to Facebook-->
+		<form id="uploadImage" action="https://graph.facebook.com/me/photos" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="access_token"/>
+			<input type="file" name="source" class="btn" id="files"/>
+			<br/>
+			<select id="album" class="btn">
+				<option value="me">Select Album</option>
+			</select>
+			<br/>
+			<input type="text" name="message" value="Some caption here.." class="btn"/>
+			<br/>
+			<input class="btn" type="button" value="Upload Image" id="uploadBtn"/>
+		</form>
+		
+		<!-- the following div will show the status messages during the workflow of application-->
+		<div id="status"></div>
+      </div>
+</body>
+</html>
